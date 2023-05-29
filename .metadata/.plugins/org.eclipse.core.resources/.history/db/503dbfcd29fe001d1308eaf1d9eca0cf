@@ -1,0 +1,21 @@
+package persistencia;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import entidades.Cliente;
+
+public class ClientePersistencia {
+	
+	public static Cliente incluir(Cliente cliente) {
+		try {
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
+			EntityManager em = emf.createEntityManager();
+		}
+		return cliente;
+	}
+	
+	
+	
+}

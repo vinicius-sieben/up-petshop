@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+	
+	<!-- Name: nome da unidade de persistência, pode ser qualquer um desde que não possua acentos e espaços. -->
+	<persistence-unit name="exemplo-jpa" transaction-type="RESOURCE_LOCAL">
+		
+		<properties>
+			<!-- Essa propriedade é padrão de conexão com o banco MySQL, após a porta 3306/ entra o nome do banco de dados a ser conectado. -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/petshop?useSSL=FALSE&amp;serverTimezone=UTC" />
+			
+			<!-- Propriedade do driver conector -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			
+			<!-- Essas propriedades são as de credenciais, user e password. Altere conforme as suas. -->
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="positivo" />
+			
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<!-- Dialeto do MySQL, faça uma busca na internet referente ao dialeto da sua versão do MySQL -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+		</properties>
+		
+	</persistence-unit>
+</persistence> 

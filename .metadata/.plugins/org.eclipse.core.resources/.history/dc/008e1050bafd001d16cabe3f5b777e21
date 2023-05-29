@@ -1,0 +1,20 @@
+package front;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		char op;
+		System.out.println("-------- PETSHOP --------");
+		System.out.println("[1] - Cadastrar cliente");
+		op = Console.readChar("Selecione uma opção: ");
+		
+		do {
+			
+			
+			
+		} while (op != 6);
+		
+	}
+
+}

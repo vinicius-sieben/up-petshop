@@ -1,0 +1,15 @@
+package front;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		System.out.println("-------- PETSHOP --------");
+		System.out.println("[1] - Cadastrar cliente");
+		
+
+		
+		
+	}
+
+}

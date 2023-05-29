@@ -1,0 +1,13 @@
+package entidades;
+
+import java.io.Serializable;
+
+public class Clientes implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private String nome;
+	private String cpf;
+	private String contato;
+	private String endereco;
+
+}

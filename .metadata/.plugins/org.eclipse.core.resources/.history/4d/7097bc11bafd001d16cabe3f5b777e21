@@ -1,0 +1,24 @@
+package front;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		char op = 0;
+		do {
+			
+			System.out.println("-------- PETSHOP --------");
+			System.out.println("[1] - Cadastrar cliente");
+			
+			switch(op) {
+			case 1:
+				break;
+			default:
+				System.out.println("Opção inválida");
+			}
+			
+		} while (op != 6);
+
+	}
+
+}
