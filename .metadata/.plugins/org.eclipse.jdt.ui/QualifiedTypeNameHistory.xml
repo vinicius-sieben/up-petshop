@@ -13,7 +13,9 @@
     <fullyQualifiedTypeName name="negocio.Negocio"/>
     <fullyQualifiedTypeName name="org.hibernate.Query"/>
     <fullyQualifiedTypeName name="javax.persistence.Query"/>
-    <fullyQualifiedTypeName name="persistencia.ClientePersistencia"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="front.Console"/>
+    <fullyQualifiedTypeName name="persistencia.ClientePersistencia"/>
+    <fullyQualifiedTypeName name="entidades.Cliente"/>
+    <fullyQualifiedTypeName name="persistencia.FuncionarioPersistencia"/>
 </qualifiedTypeNameHistroy>

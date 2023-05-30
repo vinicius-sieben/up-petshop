@@ -112,12 +112,16 @@ public class AppCliente {
 			if (objCliente != null) {
 				objCliente.setNome(Console.readString("Informe o nome atualizado do cliente: "));
 				objCliente.setCpf(Console.readString("Informe o CPF atualizado do cliente: "));
-				objCliente.setContato(Console.readString("Informe o contato atualizado do cliente: "));
-				objCliente.setEndereco(Console.readString("Informe o endereco atualizado do cliente: "));
-				if (ClientePersistencia.atualizar(objCliente) == true) {
-					System.out.println("\nCliente atualizado.");
+				if (Negocio.validarCPF(objCliente.getCpf()) == true) {
+					objCliente.setContato(Console.readString("Informe o contato atualizado do cliente: "));
+					objCliente.setEndereco(Console.readString("Informe o endereco atualizado do cliente: "));
+					if (ClientePersistencia.atualizar(objCliente) == true) {
+						System.out.println("\nCliente atualizado.");
+					} else {
+						System.out.println("\nA atualizacao nao pode ser realizada no momento...");
+					}
 				} else {
-					System.out.println("\nA atualizacao nao pode ser realizada no momento...");
+					System.out.println("\nCPF invalido!");
 				}
 
 			} else {
