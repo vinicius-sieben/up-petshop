@@ -1,24 +1,34 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-@Entity		// Essa notação significa que essa é uma entidade de domínio e corresponde a uma tabela.
+@Entity // Essa notação significa que essa é uma entidade de domínio e corresponde a uma
+		// tabela.
 public class Cliente implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	@Id		// Essa notação corresponde a coluna que vou definir como chave primária da tabela. 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)		// Essa notação representa que essa chave será gerada automaticamente pelo banco de dados.
+	@Id // Essa notação corresponde a coluna que vou definir como chave primária da
+		// tabela.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Essa notação representa que essa chave será gerada
+														// automaticamente pelo banco de dados.
 	private int id;
+	@Column
 	private String nome;
 	private String cpf;
 	private String contato;
 	private String endereco;
+	@OneToMany(mappedBy = "cliente")
+	private List<Animal> animais = new ArrayList<Animal>();
 
 	public Cliente() {
 	}
@@ -70,6 +80,10 @@ public class Cliente implements Serializable {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<Animal> getAnimais() {
+		return animais;
 	}
 
 }
