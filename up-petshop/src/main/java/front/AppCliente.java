@@ -2,6 +2,7 @@ package front;
 
 import java.util.List;
 
+import entidades.Animal;
 import entidades.Cliente;
 import negocio.Negocio;
 import persistencia.ClientePersistencia;
@@ -12,13 +13,14 @@ public class AppCliente {
 		int op;
 
 		do {
-			System.out.println("\n\n*** PAINEL DE CLIENTE ***");
+			System.out.println(Colors.BLUE_BACKGROUND + "\n\n*** PAINEL DE CLIENTE ***" + Colors.RESET);
 			System.out.println("[1] - Cadastrar cliente");
 			System.out.println("[2] - Listar clientes");
 			System.out.println("[3] - Consultar cliente");
 			System.out.println("[4] - Atualizar cliente");
 			System.out.println("[5] - Deletar cliente");
-			System.out.println("[6] - Voltar");
+			System.out.println("[6] - Consultar animais do cliente");
+			System.out.println("[7] - Voltar");
 			op = Console.readInt("Selecione uma opcao: ");
 			switch (op) {
 			case 1:
@@ -35,10 +37,12 @@ public class AppCliente {
 				break;
 			case 5:
 				deletarCliente();
+			case 6:
+				consultarAnimalCliente();
 				break;
 			}
 
-		} while (op != 6);
+		} while (op != 7);
 	}
 
 	private static void incluirCliente() {
@@ -166,4 +170,27 @@ public class AppCliente {
 
 	}
 
+	private static void consultarAnimalCliente() {
+		System.out.println("\n\n|-| CONSULTAR ANIMAIS DO CLIENTE |-|");
+		Cliente objCliente = new Cliente();
+		objCliente.setCpf(Console.readString("Informe o CPF do cliente: "));
+		if(Negocio.validarCPF(objCliente.getCpf()) == true) {
+			objCliente = ClientePersistencia.procurarPorCPF(objCliente);
+			if(objCliente != null) {
+				List<Animal> animais = objCliente.getAnimais();
+				System.out.println("Animais do cliente: " + objCliente.getNome());
+				for (Animal x : animais) {
+					System.out.println("---------------");
+					System.out.println("ID animal: " + x.getId());
+					System.out.println("Nome animal: " + x.getNome());
+					System.out.println("---------------");
+				}
+			} else {
+				System.out.println("\nCliente não encontrado.");
+			}
+		} else {
+			System.out.println("\nCPF inválido.");
+		}
+	}
+	
 }

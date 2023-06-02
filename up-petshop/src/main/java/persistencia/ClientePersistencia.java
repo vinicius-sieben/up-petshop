@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import entidades.Cliente;
 
 public class ClientePersistencia {

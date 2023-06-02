@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +29,7 @@ public class Cliente implements Serializable {
 	private String cpf;
 	private String contato;
 	private String endereco;
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<Animal> animais = new ArrayList<Animal>();
 
 	public Cliente() {
@@ -86,4 +88,8 @@ public class Cliente implements Serializable {
 		return animais;
 	}
 
+	public void setAnimais(Animal objAnimal) {
+		this.animais.add(objAnimal);
+	}
+	
 }

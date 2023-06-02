@@ -2,13 +2,14 @@ package entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Animal implements Serializable {
@@ -25,7 +26,7 @@ public class Animal implements Serializable {
 	private String cor;
 	private String raca;
 	private boolean castrado;
-	@ManyToOne
+	@OneToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name = "tutor_id")
 	private Cliente cliente;
 
@@ -106,6 +107,11 @@ public class Animal implements Serializable {
 
 	public void setCastrado(boolean castrado) {
 		this.castrado = castrado;
+	}
+
+	public static boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
