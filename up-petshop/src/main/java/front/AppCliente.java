@@ -2,6 +2,8 @@ package front;
 
 import java.util.List;
 
+import javax.swing.colorchooser.ColorSelectionModel;
+
 import entidades.Animal;
 import entidades.Cliente;
 import negocio.Negocio;
@@ -11,17 +13,24 @@ public class AppCliente {
 	public AppCliente() {
 
 		int op;
+		System.out.println(Colors.YELLOW_BOLD_BRIGHT + "\n\n   _____ _ _            _       \r\n"
+				+ "  / ____| (_)          | |      \r\n"
+				+ " | |    | |_  ___ _ __ | |_ ___ \r\n"
+				+ " | |    | | |/ _ \\ '_ \\| __/ _ \\\r\n"
+				+ " | |____| | |  __/ | | | ||  __/\r\n"
+				+ "  \\_____|_|_|\\___|_| |_|\\__\\___|\r\n"
+				+ "                                \r\n"
+				+ "                                " + Colors.RESET);
 
 		do {
-			System.out.println(Colors.BLUE_BACKGROUND + "\n\n*** PAINEL DE CLIENTE ***" + Colors.RESET);
-			System.out.println("[1] - Cadastrar cliente");
-			System.out.println("[2] - Listar clientes");
-			System.out.println("[3] - Consultar cliente");
-			System.out.println("[4] - Atualizar cliente");
-			System.out.println("[5] - Deletar cliente");
-			System.out.println("[6] - Consultar animais do cliente");
-			System.out.println("[7] - Voltar");
-			op = Console.readInt("Selecione uma opcao: ");
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "\n[1] - Cadastrar cliente" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[2] - Listar clientes" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[3] - Consultar cliente" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[4] - Atualizar cliente" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[5] - Deletar cliente" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[6] - Consultar animais do cliente" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[7] - Voltar" + Colors.RESET);
+			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "\nSelecione uma opcao: " + Colors.RESET);
 			switch (op) {
 			case 1:
 				incluirCliente();
@@ -46,24 +55,24 @@ public class AppCliente {
 	}
 
 	private static void incluirCliente() {
-		System.out.println("\n\n|-| CADASTRO DE CLIENTE |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\nCADASTRO DE CLIENTE" + Colors.RESET);
 		Cliente objCliente = new Cliente();
-		objCliente.setCpf(Console.readString("Informe o CPF do cliente: "));
+		objCliente.setCpf(Console.readString("\nInforme o CPF do cliente: "));
 		if (Negocio.validarCPF(objCliente.getCpf()) == true) {
 			if (ClientePersistencia.procurarPorCPF(objCliente) == null) {
 				objCliente.setNome(Console.readString("Informe o nome do cliente: "));
-				objCliente.setContato(Console.readString("Informe o numero de contato do cliente: "));
-				objCliente.setEndereco(Console.readString("Informe o endereco do cliente: "));
+				objCliente.setContato(Console.readString("Informe o número de contato do cliente: "));
+				objCliente.setEndereco(Console.readString("Informe o endereço do cliente: "));
 				if (ClientePersistencia.incluir(objCliente) == true) {
-					System.out.println("\nCliente cadastrado com sucesso.");
+					System.out.println(Colors.GREEN_BRIGHT + "\nCliente cadastrado com sucesso." + Colors.RESET);
 				} else {
-					System.out.println("\nA atualizacao nao pode ser realizada no momento...");
+					System.out.println(Colors.RED_BRIGHT + "\nA atualização não pode ser realizada no momento..." + Colors.RESET);
 				}
 			} else {
-				System.out.println("\nCliente ja cadastrado.");
+				System.out.println(Colors.RED_BRIGHT + "\nCliente já cadastrado." + Colors.RESET);
 			}
 		} else {
-			System.out.println("\nCPF invalido!");
+			System.out.println(Colors.RED_BRIGHT + "\nCPF inválido!" + Colors.RESET);
 		}
 	}
 
