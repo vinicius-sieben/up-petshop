@@ -18,4 +18,6 @@
     <fullyQualifiedTypeName name="persistencia.ClientePersistencia"/>
     <fullyQualifiedTypeName name="entidades.Cliente"/>
     <fullyQualifiedTypeName name="persistencia.FuncionarioPersistencia"/>
+    <fullyQualifiedTypeName name="front.Colors"/>
+    <fullyQualifiedTypeName name="javax.swing.colorchooser.ColorSelectionModel"/>
 </qualifiedTypeNameHistroy>

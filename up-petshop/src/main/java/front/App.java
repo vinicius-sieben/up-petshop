@@ -12,15 +12,14 @@ public class App {
 					+ " |  ___/|  __|    | |  \\___ \\|  __  | |  | |  ___/ \r\n"
 					+ " | |    | |____   | |  ____) | |  | | |__| | |     \r\n"
 					+ " |_|    |______|  |_| |_____/|_|  |_|\\____/|_|     \r\n"
-					+ "                                                   \r\n"
-					+ "                                                   \r\n"
-					+ "" + Colors.RESET);
+					+ "                                                    \r\n"
+					+ "                                                   \r\n"  + Colors.RESET);
 		do {
-			System.out.println("[1] - Menu cliente");
-			System.out.println("[2] - Menu funcionario");
-			System.out.println("[3] - Menu animal");
-			System.out.println("[4] - Sair");
-			op = Console.readInt("Selecione uma opcao: ");
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[1] - Menu cliente" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[2] - Menu funcionario" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[3] - Menu animal" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[4] - Sair" + Colors.RESET);
+			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "\nSelecione uma opção: " + Colors.RESET);
 			switch (op) {
 			case 1:
 				new AppCliente();
