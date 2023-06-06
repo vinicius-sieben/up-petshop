@@ -41,6 +41,7 @@ public class AppCliente {
 				break;
 			case 5:
 				deletarCliente();
+				break;
 			case 6:
 				consultarAnimalCliente();
 				break;
@@ -75,8 +76,8 @@ public class AppCliente {
 	private static void listarClientes() {
 		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| LISTAGEM DE CLIENTES |-|" + Colors.RESET);
 		Cliente objCliente = new Cliente();
-		objCliente.setNome(Console
-				.readString(Colors.YELLOW_BOLD_BRIGHT + "Informe uma parte do nome que deseja listar: " + Colors.RESET));
+		objCliente.setNome(Console.readString(
+				Colors.YELLOW_BOLD_BRIGHT + "Informe uma parte do nome que deseja listar: " + Colors.RESET));
 		List<Cliente> clientes = ClientePersistencia.getClientes(objCliente);
 		if (!clientes.isEmpty()) {
 			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Clientes registrados:" + Colors.RESET);
@@ -161,7 +162,8 @@ public class AppCliente {
 				System.out.println("	CPF: " + objCliente.getCpf());
 				System.out.println("	Contato: " + objCliente.getContato());
 				System.out.println("	Endereco: " + objCliente.getEndereco());
-				String resposta = Console.readString("Deseja deletar esse cliente? S/N: ");
+				String resposta = Console.readString(Colors.RED_BRIGHT + "Deseja deletar esse cliente? " + Colors.RESET
+						+ Colors.GREEN_BRIGHT + "S/N: " + Colors.RESET);
 				if (resposta.equals("S")) {
 					if (ClientePersistencia.deletar(objCliente) == true) {
 						System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nCliente deletado." + Colors.RESET);
@@ -189,7 +191,7 @@ public class AppCliente {
 			objCliente = ClientePersistencia.procurarPorCPF(objCliente);
 			if (objCliente != null) {
 				List<Animal> animais = objCliente.getAnimais();
-				System.out.println("Animais do cliente: " + objCliente.getNome());
+				System.out.println("\nAnimais do cliente: " + objCliente.getNome());
 				for (Animal x : animais) {
 					System.out.println("---------------");
 					System.out.println("ID animal: " + x.getId());

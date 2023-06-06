@@ -13,7 +13,7 @@ public class AppFuncionario {
 
 		do {
 			System.out.println(
-					Colors.YELLOW_BOLD_BRIGHT + "\r\n" + "  ______                _               __       _       \r\n"
+					Colors.YELLOW_BOLD_BRIGHT + "\n\r\n" + "  ______                _               __       _       \r\n"
 							+ " |  ____|              (_)             /_/      (_)      \r\n"
 							+ " | |__ _   _ _ __   ___ _  ___  _ __   __ _ _ __ _  ___  \r\n"
 							+ " |  __| | | | '_ \\ / __| |/ _ \\| '_ \\ / _` | '__| |/ _ \\ \r\n"
@@ -27,7 +27,7 @@ public class AppFuncionario {
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[4] - Atualizar funcionario" + Colors.RESET);
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[5] - Deletar funcionario" + Colors.RESET);
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[6] - Voltar" + Colors.RESET);
-			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "Selecione uma opcao: " + Colors.RESET);
+			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "\nSelecione uma opcao: " + Colors.RESET);
 			switch (op) {
 			case 1:
 				incluirFuncionario();

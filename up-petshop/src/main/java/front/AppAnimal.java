@@ -14,7 +14,7 @@ public class AppAnimal {
 		int op;
 
 		do {
-			System.out.println(Colors.YELLOW_BOLD_BRIGHT + "\n\n\r\n" + "                 _                 _ \r\n"
+			System.out.println(Colors.YELLOW_BOLD_BRIGHT + "\n\r\n" + "                 _                 _ \r\n"
 					+ "     /\\         (_)               | |\r\n" + "    /  \\   _ __  _ _ __ ___   __ _| |\r\n"
 					+ "   / /\\ \\ | '_ \\| | '_ ` _ \\ / _` | |\r\n" + "  / ____ \\| | | | | | | | | | (_| | |\r\n"
 					+ " /_/    \\_\\_| |_|_|_| |_| |_|\\__,_|_|\r\n" + "                                     \r\n"
@@ -25,7 +25,7 @@ public class AppAnimal {
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[4] - Atualizar animal" + Colors.RESET);
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[5] - Deletar animal" + Colors.RESET);
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[6] - Voltar" + Colors.RESET);
-			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "Selecione uma opcao: " + Colors.RESET);
+			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "\nSelecione uma opcao: " + Colors.RESET);
 			switch (op) {
 
 			case 1:
