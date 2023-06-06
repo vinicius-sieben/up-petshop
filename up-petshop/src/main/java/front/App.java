@@ -5,7 +5,11 @@ public class App {
 	public static void main(String[] args) {
 
 		int op;
-			System.out.println(Colors.GREEN_BOLD + "\r\n"
+			System.out.println(Colors.GREEN_BOLD + ",-.___,-.\r\n"
+					+ "\\_/_ _\\_/\r\n"
+					+ "  )O_O(\r\n"
+					+ " { (_) }\r\n"
+					+ "  `-^-'  \r\n"
 					+ "  _____  ______ _______ _____ _    _  ____  _____  \r\n"
 					+ " |  __ \\|  ____|__   __/ ____| |  | |/ __ \\|  __ \\ \r\n"
 					+ " | |__) | |__     | | | (___ | |__| | |  | | |__) |\r\n"

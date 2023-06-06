@@ -12,14 +12,22 @@ public class AppFuncionario {
 		int op;
 
 		do {
-			System.out.println("\n\n*** PAINEL DE FUNCIONARIO ***");
-			System.out.println("[1] - Cadastrar funcionario");
-			System.out.println("[2] - Listar funcionarios");
-			System.out.println("[3] - Consultar funcionario");
-			System.out.println("[4] - Atualizar funcionario");
-			System.out.println("[5] - Deletar funcionario");
-			System.out.println("[6] - Voltar");
-			op = Console.readInt("Selecione uma opcao: ");
+			System.out.println(
+					Colors.YELLOW_BOLD_BRIGHT + "\r\n" + "  ______                _               __       _       \r\n"
+							+ " |  ____|              (_)             /_/      (_)      \r\n"
+							+ " | |__ _   _ _ __   ___ _  ___  _ __   __ _ _ __ _  ___  \r\n"
+							+ " |  __| | | | '_ \\ / __| |/ _ \\| '_ \\ / _` | '__| |/ _ \\ \r\n"
+							+ " | |  | |_| | | | | (__| | (_) | | | | (_| | |  | | (_) |\r\n"
+							+ " |_|   \\__,_|_| |_|\\___|_|\\___/|_| |_|\\__,_|_|  |_|\\___/ \r\n"
+							+ "                                                         \r\n"
+							+ "                                                         \r\n" + "" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[1] - Cadastrar funcionario" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[2] - Listar funcionarios" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[3] - Consultar funcionario" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[4] - Atualizar funcionario" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[5] - Deletar funcionario" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[6] - Voltar" + Colors.RESET);
+			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "Selecione uma opcao: " + Colors.RESET);
 			switch (op) {
 			case 1:
 				incluirFuncionario();
@@ -42,34 +50,37 @@ public class AppFuncionario {
 	}
 
 	private static void incluirFuncionario() {
-		System.out.println("\n\n|-| CADASTRO DE FUNCIONARIO |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CADASTRO DE FUNCIONARIO |-|" + Colors.RESET);
 		Funcionario objFuncionario = new Funcionario();
-		objFuncionario.setCpf(Console.readString("Informe o CPF do funcionario: "));
+		objFuncionario
+				.setCpf(Console.readString(Colors.WHITE_BOLD_BRIGHT + "Informe o CPF do funcionario: " + Colors.RESET));
 		if (Negocio.validarCPF(objFuncionario.getCpf()) == true) {
 			if (FuncionarioPersistencia.procurarPorCPF(objFuncionario) == null) {
 				objFuncionario.setNome(Console.readString("Informe o nome do funcionario: "));
 				objFuncionario.setSalario(Console.readDouble("Informe o salario do funcionario: "));
 				objFuncionario.setComissao(Console.readDouble("Informe a comissao do funcionario: "));
 				if (FuncionarioPersistencia.incluir(objFuncionario) == true) {
-					System.out.println("\nFuncionario cadastrado com sucesso.");
+					System.out.println(Colors.GREEN_BRIGHT + "\nFuncionario cadastrado com sucesso." + Colors.RESET);
 				} else {
-					System.out.println("\nA atualizacao nao pode ser realizada no momento...");
+					System.out.println(
+							Colors.RED_BRIGHT + "\nA atualizacao nao pode ser realizada no momento..." + Colors.RESET);
 				}
 			} else {
-				System.out.println("\nFuncionario ja cadastrado.");
+				System.out.println(Colors.RED_BRIGHT + "\nFuncionario ja cadastrado." + Colors.RESET);
 			}
 		} else {
-			System.out.println("\nCPF invalido!");
+			System.out.println(Colors.RED_BRIGHT + "\nCPF invalido!" + Colors.RESET);
 		}
 	}
 
 	private static void listarFuncionarios() {
-		System.out.println("\n\n|-| LISTAGEM DE FUNCIONARIOS |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| LISTAGEM DE FUNCIONARIOS |-|" + Colors.RESET);
 		Funcionario objFuncionario = new Funcionario();
-		objFuncionario.setNome(Console.readString("Informe uma parte do nome que deseja listar: "));
+		objFuncionario.setNome(Console
+				.readString(Colors.WHITE_BOLD_BRIGHT + "Informe uma parte do nome que deseja listar: " + Colors.RESET));
 		List<Funcionario> funcionarios = FuncionarioPersistencia.getFuncionarios(objFuncionario);
 		if (!funcionarios.isEmpty()) {
-			System.out.println("Funcionarios registrados:");
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Funcionarios registrados:" + Colors.RESET);
 			System.out.println("-----------------");
 			for (Funcionario x : funcionarios) {
 				System.out.println("	ID: " + x.getId());
@@ -80,18 +91,19 @@ public class AppFuncionario {
 				System.out.println("------------------");
 			}
 		} else {
-			System.out.println("\nFuncionario(s) nao encontrados!");
+			System.out.println(Colors.RED_BRIGHT + "\nFuncionario(s) nao encontrados!" + Colors.RESET);
 		}
 
 	}
 
 	private static void consultarFuncionario() {
-		System.out.println("\n\n|-| CONSULTA DE FUNCIONARIOS |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CONSULTA DE FUNCIONARIOS |-|" + Colors.RESET);
 		Funcionario objFuncionario = new Funcionario();
-		objFuncionario.setId(Console.readInt("Informe o ID do funcionario que deseja buscar: "));
+		objFuncionario.setId(Console
+				.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe o ID do funcionario que deseja buscar: " + Colors.RESET));
 		objFuncionario = FuncionarioPersistencia.procurarPorId(objFuncionario);
 		if (objFuncionario != null) {
-			System.out.println("Funcionario encontrado:");
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Funcionario encontrado:" + Colors.RESET);
 			System.out.println("	ID: " + objFuncionario.getId());
 			System.out.println("	Nome: " + objFuncionario.getNome());
 			System.out.println("	CPF: " + objFuncionario.getCpf());
@@ -99,14 +111,15 @@ public class AppFuncionario {
 			System.out.println("	Comissao: " + objFuncionario.getComissao());
 			System.out.println("----------------------------------");
 		} else {
-			System.out.println("\nNenhum funcionario com esse ID registrado.");
+			System.out.println(Colors.RED_BRIGHT + "\nNenhum funcionario com esse ID registrado." + Colors.RESET);
 		}
 	}
 
 	private static void atualizarFuncionario() {
-		System.out.println("\n\n|-| ATUALIZACAO DE FUNCIONARIOS |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| ATUALIZACAO DE FUNCIONARIOS |-|" + Colors.RESET);
 		Funcionario objFuncionario = new Funcionario();
-		objFuncionario.setCpf(Console.readString("Informe o CPF do funcionario que deseja atualizar os dados: "));
+		objFuncionario.setCpf(Console.readString(Colors.WHITE_BOLD_BRIGHT
+				+ "Informe o CPF do funcionario que deseja atualizar os dados: " + Colors.RESET));
 		if (Negocio.validarCPF(objFuncionario.getCpf()) == true) {
 			objFuncionario = FuncionarioPersistencia.procurarPorCPF(objFuncionario);
 			if (objFuncionario != null) {
@@ -116,16 +129,17 @@ public class AppFuncionario {
 					objFuncionario.setSalario(Console.readDouble("Informe o salario atualizado do funcionario: "));
 					objFuncionario.setComissao(Console.readDouble("Informe comissao atualizada do funcionario: "));
 					if (FuncionarioPersistencia.atualizar(objFuncionario) == true) {
-						System.out.println("\nFuncionario atualizado.");
+						System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nFuncionario atualizado." + Colors.RESET);
 					} else {
-						System.out.println("\nA atualizacao nao pode ser realizada no momento...");
+						System.out.println(Colors.RED_BRIGHT + "\nA atualizacao nao pode ser realizada no momento..."
+								+ Colors.RESET);
 					}
 				} else {
-					System.out.println("\nCPF invalido!");
+					System.out.println(Colors.RED_BRIGHT + "\nCPF invalido!" + Colors.RESET);
 				}
 
 			} else {
-				System.out.println("\nFuncionario não encontrado.");
+				System.out.println(Colors.RED_BRIGHT + "\nFuncionario não encontrado." + Colors.RESET);
 			}
 
 		} else {
@@ -135,13 +149,14 @@ public class AppFuncionario {
 	}
 
 	private static void deletarFuncionario() {
-		System.out.println("\n\n|-| DELECAO DE FUNCIONARIOS |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| DELECAO DE FUNCIONARIOS |-|" + Colors.RESET);
 		Funcionario objFuncionario = new Funcionario();
-		objFuncionario.setCpf(Console.readString("Informe o CPF do funcionario a ser deletado: "));
+		objFuncionario.setCpf(Console
+				.readString(Colors.WHITE_BOLD_BRIGHT + "Informe o CPF do funcionario a ser deletado: " + Colors.RESET));
 		if (Negocio.validarCPF(objFuncionario.getCpf()) == true) {
 			objFuncionario = FuncionarioPersistencia.procurarPorCPF(objFuncionario);
 			if (objFuncionario != null) {
-				System.out.println("Funcionario encontrado:");
+				System.out.println(Colors.GREEN_BOLD_BRIGHT + "Funcionario encontrado:" + Colors.RESET);
 				System.out.println("	ID: " + objFuncionario.getId());
 				System.out.println("	Nome: " + objFuncionario.getNome());
 				System.out.println("	CPF: " + objFuncionario.getCpf());
@@ -149,17 +164,18 @@ public class AppFuncionario {
 				System.out.println("	Comissao: " + objFuncionario.getComissao());
 				String resposta = Console.readString("Deseja deletar esse funcionario? S/N: ");
 				if (resposta.equals("S")) {
-					if(FuncionarioPersistencia.deletar(objFuncionario) == true) {
-						System.out.println("\nFuncionario deletado.");
+					if (FuncionarioPersistencia.deletar(objFuncionario) == true) {
+						System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nFuncionario deletado." + Colors.RESET);
 					} else {
-						System.out.println("\nA delecao nao pode ser realizada no momento...");
+						System.out.println(
+								Colors.RED_BRIGHT + "\nA delecao nao pode ser realizada no momento..." + Colors.RESET);
 					}
 				}
 			} else {
-				System.out.println("Funcionario não encontrado.");
+				System.out.println(Colors.RED_BRIGHT + "Funcionario não encontrado." + Colors.RESET);
 			}
 		} else {
-			System.out.println("\nCPF invalido!");
+			System.out.println(Colors.RED_BRIGHT + "\nCPF invalido!" + Colors.RESET);
 		}
 	}
 

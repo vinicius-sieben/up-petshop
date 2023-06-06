@@ -2,8 +2,6 @@ package front;
 
 import java.util.List;
 
-import javax.swing.colorchooser.ColorSelectionModel;
-
 import entidades.Animal;
 import entidades.Cliente;
 import negocio.Negocio;
@@ -14,12 +12,9 @@ public class AppCliente {
 
 		int op;
 		System.out.println(Colors.YELLOW_BOLD_BRIGHT + "\n\n   _____ _ _            _       \r\n"
-				+ "  / ____| (_)          | |      \r\n"
-				+ " | |    | |_  ___ _ __ | |_ ___ \r\n"
-				+ " | |    | | |/ _ \\ '_ \\| __/ _ \\\r\n"
-				+ " | |____| | |  __/ | | | ||  __/\r\n"
-				+ "  \\_____|_|_|\\___|_| |_|\\__\\___|\r\n"
-				+ "                                \r\n"
+				+ "  / ____| (_)          | |      \r\n" + " | |    | |_  ___ _ __ | |_ ___ \r\n"
+				+ " | |    | | |/ _ \\ '_ \\| __/ _ \\\r\n" + " | |____| | |  __/ | | | ||  __/\r\n"
+				+ "  \\_____|_|_|\\___|_| |_|\\__\\___|\r\n" + "                                \r\n"
 				+ "                                " + Colors.RESET);
 
 		do {
@@ -66,7 +61,8 @@ public class AppCliente {
 				if (ClientePersistencia.incluir(objCliente) == true) {
 					System.out.println(Colors.GREEN_BRIGHT + "\nCliente cadastrado com sucesso." + Colors.RESET);
 				} else {
-					System.out.println(Colors.RED_BRIGHT + "\nA atualização não pode ser realizada no momento..." + Colors.RESET);
+					System.out.println(
+							Colors.RED_BRIGHT + "\nA atualização não pode ser realizada no momento..." + Colors.RESET);
 				}
 			} else {
 				System.out.println(Colors.RED_BRIGHT + "\nCliente já cadastrado." + Colors.RESET);
@@ -77,12 +73,13 @@ public class AppCliente {
 	}
 
 	private static void listarClientes() {
-		System.out.println("\n\n|-| LISTAGEM DE CLIENTES |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| LISTAGEM DE CLIENTES |-|" + Colors.RESET);
 		Cliente objCliente = new Cliente();
-		objCliente.setNome(Console.readString("Informe uma parte do nome que deseja listar: "));
+		objCliente.setNome(Console
+				.readString(Colors.YELLOW_BOLD_BRIGHT + "Informe uma parte do nome que deseja listar: " + Colors.RESET));
 		List<Cliente> clientes = ClientePersistencia.getClientes(objCliente);
 		if (!clientes.isEmpty()) {
-			System.out.println("Clientes registrados:");
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Clientes registrados:" + Colors.RESET);
 			System.out.println("-----------------");
 			for (Cliente x : clientes) {
 				System.out.println("	ID: " + x.getId());
@@ -93,18 +90,19 @@ public class AppCliente {
 				System.out.println("------------------");
 			}
 		} else {
-			System.out.println("\nCliente(s) nao encontrados!");
+			System.out.println(Colors.RED_BRIGHT + "\nCliente(s) nao encontrados!" + Colors.RESET);
 		}
 
 	}
 
 	private static void consultarCliente() {
-		System.out.println("\n\n|-| CONSULTA DE CLIENTES |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CONSULTA DE CLIENTES |-|" + Colors.RESET);
 		Cliente objCliente = new Cliente();
-		objCliente.setId(Console.readInt("Informe o ID de cliente que deseja buscar: "));
+		objCliente.setId(Console
+				.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe o ID de cliente que deseja buscar: " + Colors.RESET));
 		objCliente = ClientePersistencia.procurarPorId(objCliente);
 		if (objCliente != null) {
-			System.out.println("Cliente encontrado:");
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Cliente encontrado:" + Colors.RESET);
 			System.out.println("	ID: " + objCliente.getId());
 			System.out.println("	Nome: " + objCliente.getNome());
 			System.out.println("	CPF: " + objCliente.getCpf());
@@ -112,14 +110,15 @@ public class AppCliente {
 			System.out.println("	Endereco: " + objCliente.getEndereco());
 			System.out.println("----------------------------------");
 		} else {
-			System.out.println("\nNenhum cliente com esse ID registrado.");
+			System.out.println(Colors.RED_BRIGHT + "\nNenhum cliente com esse ID registrado." + Colors.RESET);
 		}
 	}
 
 	private static void atualizarCliente() {
-		System.out.println("\n\n|-| ATUALIZACAO DE CLIENTES |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| ATUALIZACAO DE CLIENTES |-|" + Colors.RESET);
 		Cliente objCliente = new Cliente();
-		objCliente.setCpf(Console.readString("Informe o CPF do cliente que deseja atualizar os dados: "));
+		objCliente.setCpf(Console.readString(
+				Colors.WHITE_BOLD_BRIGHT + "Informe o CPF do cliente que deseja atualizar os dados: " + Colors.RESET));
 		if (Negocio.validarCPF(objCliente.getCpf()) == true) {
 			objCliente = ClientePersistencia.procurarPorCPF(objCliente);
 			if (objCliente != null) {
@@ -129,32 +128,34 @@ public class AppCliente {
 					objCliente.setContato(Console.readString("Informe o contato atualizado do cliente: "));
 					objCliente.setEndereco(Console.readString("Informe o endereco atualizado do cliente: "));
 					if (ClientePersistencia.atualizar(objCliente) == true) {
-						System.out.println("\nCliente atualizado.");
+						System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nCliente atualizado." + Colors.RESET);
 					} else {
-						System.out.println("\nA atualizacao nao pode ser realizada no momento...");
+						System.out.println(Colors.RED_BRIGHT + "\nA atualizacao nao pode ser realizada no momento..."
+								+ Colors.RESET);
 					}
 				} else {
-					System.out.println("\nCPF invalido!");
+					System.out.println(Colors.RED_BRIGHT + "\nCPF invalido!" + Colors.RESET);
 				}
 
 			} else {
-				System.out.println("\nCliente não encontrado.");
+				System.out.println(Colors.RED_BRIGHT + "\nCliente não encontrado." + Colors.RESET);
 			}
 
 		} else {
-			System.out.println("\nCPF invalido!");
+			System.out.println(Colors.RED_BRIGHT + "\nCPF invalido!" + Colors.RESET);
 		}
 
 	}
 
 	private static void deletarCliente() {
-		System.out.println("\n\n|-| DELECAO DE CLIENTES |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| DELETACAO DE CLIENTES |-|" + Colors.RESET);
 		Cliente objCliente = new Cliente();
-		objCliente.setCpf(Console.readString("Informe o CPF do cliente a ser deletado: "));
+		objCliente.setCpf(Console
+				.readString(Colors.WHITE_BOLD_BRIGHT + "Informe o CPF do cliente a ser deletado: " + Colors.RESET));
 		if (Negocio.validarCPF(objCliente.getCpf()) == true) {
 			objCliente = ClientePersistencia.procurarPorCPF(objCliente);
 			if (objCliente != null) {
-				System.out.println("Cliente encontrado:");
+				System.out.println(Colors.GREEN_BOLD_BRIGHT + "Cliente encontrado:" + Colors.RESET);
 				System.out.println("	ID: " + objCliente.getId());
 				System.out.println("	Nome: " + objCliente.getNome());
 				System.out.println("	CPF: " + objCliente.getCpf());
@@ -163,29 +164,30 @@ public class AppCliente {
 				String resposta = Console.readString("Deseja deletar esse cliente? S/N: ");
 				if (resposta.equals("S")) {
 					if (ClientePersistencia.deletar(objCliente) == true) {
-						System.out.println("\nCliente deletado.");
+						System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nCliente deletado." + Colors.RESET);
 					} else {
-						System.out.println("\nA delecao nao pode ser realizada no momento...");
+						System.out.println(
+								Colors.RED_BRIGHT + "\nA delecao nao pode ser realizada no momento..." + Colors.RESET);
 					}
 				} else {
-					System.out.println("\nOperacao cancelada.");
+					System.out.println(Colors.RED_BRIGHT + "\nOperacao cancelada." + Colors.RESET);
 				}
 			} else {
-				System.out.println("Cliente não encontrado.");
+				System.out.println(Colors.RED_BRIGHT + "Cliente não encontrado." + Colors.RESET);
 			}
 		} else {
-			System.out.println("\nCPF invalido!");
+			System.out.println(Colors.RED_BRIGHT + "\nCPF invalido!" + Colors.RESET);
 		}
 
 	}
 
 	private static void consultarAnimalCliente() {
-		System.out.println("\n\n|-| CONSULTAR ANIMAIS DO CLIENTE |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CONSULTAR ANIMAIS DO CLIENTE |-|" + Colors.RESET);
 		Cliente objCliente = new Cliente();
-		objCliente.setCpf(Console.readString("Informe o CPF do cliente: "));
-		if(Negocio.validarCPF(objCliente.getCpf()) == true) {
+		objCliente.setCpf(Console.readString(Colors.WHITE_BOLD_BRIGHT + "Informe o CPF do cliente: " + Colors.RESET));
+		if (Negocio.validarCPF(objCliente.getCpf()) == true) {
 			objCliente = ClientePersistencia.procurarPorCPF(objCliente);
-			if(objCliente != null) {
+			if (objCliente != null) {
 				List<Animal> animais = objCliente.getAnimais();
 				System.out.println("Animais do cliente: " + objCliente.getNome());
 				for (Animal x : animais) {
@@ -195,11 +197,11 @@ public class AppCliente {
 					System.out.println("---------------");
 				}
 			} else {
-				System.out.println("\nCliente não encontrado.");
+				System.out.println(Colors.RED_BRIGHT + "\nCliente não encontrado." + Colors.RESET);
 			}
 		} else {
-			System.out.println("\nCPF inválido.");
+			System.out.println(Colors.RED_BRIGHT + "\nCPF inválido." + Colors.RESET);
 		}
 	}
-	
+
 }
