@@ -97,21 +97,24 @@ public class AppCliente {
 	}
 
 	private static void consultarCliente() {
-		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CONSULTA DE CLIENTES |-|" + Colors.RESET);
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CONSULTAR CLIENTE|-|" + Colors.RESET);
 		Cliente objCliente = new Cliente();
-		objCliente.setId(Console
-				.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe o ID de cliente que deseja buscar: " + Colors.RESET));
-		objCliente = ClientePersistencia.procurarPorId(objCliente);
-		if (objCliente != null) {
-			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Cliente encontrado:" + Colors.RESET);
-			System.out.println("	ID: " + objCliente.getId());
-			System.out.println("	Nome: " + objCliente.getNome());
-			System.out.println("	CPF: " + objCliente.getCpf());
-			System.out.println("	Contato: " + objCliente.getContato());
-			System.out.println("	Endereco: " + objCliente.getEndereco());
-			System.out.println("----------------------------------");
+		objCliente.setCpf(Console.readString(
+				Colors.WHITE_BOLD_BRIGHT + "Informe o CPF do cliente que deseja consultar: " + Colors.RESET));
+		if (Negocio.validarCPF(objCliente.getCpf()) == true) {
+			objCliente = ClientePersistencia.procurarPorCPF(objCliente);
+			if (objCliente != null) {
+				System.out.println(Colors.GREEN_BOLD_BRIGHT + "Cliente encontrado:" + Colors.RESET);
+				System.out.println("	ID: " + objCliente.getId());
+				System.out.println("	Nome: " + objCliente.getNome());
+				System.out.println("	CPF: " + objCliente.getCpf());
+				System.out.println("	Contato: " + objCliente.getContato());
+				System.out.println("	Endereco: " + objCliente.getEndereco());
+			} else {
+				System.out.println(Colors.RED_BRIGHT + "Cliente não encontrado." + Colors.RESET);
+			}
 		} else {
-			System.out.println(Colors.RED_BRIGHT + "\nNenhum cliente com esse ID registrado." + Colors.RESET);
+			System.out.println(Colors.RED_BRIGHT + "\nCPF invalido!" + Colors.RESET);
 		}
 	}
 
