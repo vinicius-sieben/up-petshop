@@ -36,7 +36,6 @@ public class Cliente implements Serializable {
 	}
 
 	public Cliente(int id, String nome, String cpf, String contato, String endereco) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -91,5 +90,5 @@ public class Cliente implements Serializable {
 	public void setAnimais(Animal objAnimal) {
 		this.animais.add(objAnimal);
 	}
-	
+
 }

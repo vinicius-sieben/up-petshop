@@ -35,7 +35,6 @@ public class Animal implements Serializable {
 	}
 
 	public Animal(String nome, int idade, Cliente tutor, String especie, String cor, String raca, boolean castrado) {
-		super();
 		this.nome = nome;
 		this.idade = idade;
 		this.cliente = tutor;

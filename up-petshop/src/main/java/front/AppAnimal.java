@@ -12,16 +12,20 @@ public class AppAnimal {
 	public AppAnimal() {
 
 		int op;
-			
+
 		do {
-			System.out.println("\n\n*** PAINEL DE ANIMAL ***");
-			System.out.println("[1] - Cadastrar animal");
-			System.out.println("[2] - Listar animais");
-			System.out.println("[3] - Consultar animal");
-			System.out.println("[4] - Atualizar animal");
-			System.out.println("[5] - Deletar animal");
-			System.out.println("[6] - Voltar");
-			op = Console.readInt("Selecione uma opcao: ");
+			System.out.println(Colors.YELLOW_BOLD_BRIGHT + "\n\r\n" + "                 _                 _ \r\n"
+					+ "     /\\         (_)               | |\r\n" + "    /  \\   _ __  _ _ __ ___   __ _| |\r\n"
+					+ "   / /\\ \\ | '_ \\| | '_ ` _ \\ / _` | |\r\n" + "  / ____ \\| | | | | | | | | | (_| | |\r\n"
+					+ " /_/    \\_\\_| |_|_|_| |_| |_|\\__,_|_|\r\n" + "                                     \r\n"
+					+ "                                     \r\n" + "" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[1] - Cadastrar animal" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[2] - Listar animais" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[3] - Consultar animal" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[4] - Atualizar animal" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[5] - Deletar animal" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[6] - Voltar" + Colors.RESET);
+			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "\nSelecione uma opcao: " + Colors.RESET);
 			switch (op) {
 
 			case 1:
@@ -45,7 +49,7 @@ public class AppAnimal {
 	}
 
 	private static void incluirAnimal() {
-		System.out.println("\n\n|-| CADASTRO DE ANIMAL |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CADASTRO DE ANIMAL |-|" + Colors.RESET);
 		Animal objAnimal = new Animal();
 		Cliente objCliente = new Cliente();
 		objAnimal.setNome(Console.readString("Informe o nome do animal: "));
@@ -55,7 +59,7 @@ public class AppAnimal {
 			objCliente = ClientePersistencia.procurarPorCPF(objCliente);
 			if (objCliente != null) {
 				objAnimal.setTutor(objCliente);
-				System.out.println("Tutor encontrado e associado ao animal");
+				System.out.println(Colors.GREEN_BOLD_BRIGHT + "Tutor encontrado e associado ao animal" + Colors.RESET);
 				objAnimal.setEspecie(Console.readString("Informe a especie do animal: "));
 				objAnimal.setCor(Console.readString("Informe a cor do animal: "));
 				objAnimal.setRaca(Console.readString("Informe a raca do animal: "));
@@ -64,33 +68,36 @@ public class AppAnimal {
 					objAnimal.setCastrado(true);
 					objCliente.getAnimais().add(objAnimal);
 					if (AnimalPersistencia.incluir(objAnimal) == true && ClientePersistencia.atualizar(objCliente)) {
-						System.out.println("\nAnimal cadastrado.");
+						System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nAnimal cadastrado." + Colors.RESET);
 					} else {
-						System.out.println("\nNao foi possivel cadastrar o animal, tente novamente.");
+						System.out.println(Colors.RED_BRIGHT + "\nNao foi possivel cadastrar o animal, tente novamente."
+								+ Colors.RESET);
 					}
 				} else if (resposta.equals("N")) {
 					objAnimal.setCastrado(false);
 					if (AnimalPersistencia.incluir(objAnimal) == true) {
-						System.out.println("\nAnimal cadastrado.");
+						System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nAnimal cadastrado." + Colors.RESET);
 					} else {
-						System.out.println("\nNao foi possivel cadastrar o animal, tente novamente.");
+						System.out.println(Colors.RED_BRIGHT + "\nNao foi possivel cadastrar o animal, tente novamente."
+								+ Colors.RESET);
 					}
 				} else {
-					System.out.println("\nOpcao invalida.");
+					System.out.println(Colors.RED_BRIGHT + "\nOpcao invalida." + Colors.RESET);
 				}
 			} else {
-				System.out.println("\nTutor nao encontrado.");
+				System.out.println(Colors.RED_BRIGHT + "\nTutor nao encontrado." + Colors.RESET);
 			}
 		} else {
-			System.out.println("\nCPF invalido!");
+			System.out.println(Colors.RED_BRIGHT + "\nCPF invalido!" + Colors.RESET);
 		}
 
 	}
 
 	private static void listarAnimal() {
-		System.out.println("\n\n|-| LISTAGEM DE ANIMAIS |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| LISTAGEM DE ANIMAIS |-|" + Colors.RESET);
 		Animal objAnimal = new Animal();
-		objAnimal.setNome(Console.readString("Informe uma parte do nome que deseja listar: "));
+		objAnimal.setNome(Console
+				.readString(Colors.WHITE_BOLD_BRIGHT + "Informe uma parte do nome que deseja listar: " + Colors.RESET));
 		List<Animal> animais = AnimalPersistencia.getAnimais(objAnimal);
 		if (!Animal.isEmpty()) {
 			System.out.println("Animais registrados:");
@@ -107,18 +114,19 @@ public class AppAnimal {
 				System.out.println("------------------");
 			}
 		} else {
-			System.out.println("\nAnimal(s) nao encontrado!");
+			System.out.println(Colors.RED_BRIGHT + "\nAnimal(s) nao encontrado!" + Colors.RESET);
 		}
 
 	}
 
 	private static void consultarAnimal() {
-		System.out.println("\n\n|-| CONSULTA DE ANIMAIS |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CONSULTA DE ANIMAIS |-|" + Colors.RESET);
 		Animal objAnimal = new Animal();
-		objAnimal.setId(Console.readInt("Informe o ID do animal que deseja buscar: "));
+		objAnimal.setId(Console
+				.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe o ID do animal que deseja buscar: " + Colors.RESET));
 		objAnimal = AnimalPersistencia.procurarPorId(objAnimal);
 		if (objAnimal != null) {
-			System.out.println("Animal encontrado:");
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Animal encontrado:" + Colors.RESET);
 			System.out.println("    ID tutor: " + objAnimal.getTutor().getId());
 			System.out.println("    Nome do tutor: " + objAnimal.getTutor().getNome());
 			System.out.println("	ID animal: " + objAnimal.getId());
@@ -129,14 +137,15 @@ public class AppAnimal {
 			System.out.println("	Raca: " + objAnimal.getRaca());
 			System.out.println("----------------------------------");
 		} else {
-			System.out.println("\nNenhum animal com esse ID registrado.");
+			System.out.println(Colors.RED_BRIGHT + "\nNenhum animal com esse ID registrado." + Colors.RESET);
 		}
 	}
 
 	private static void atualizarAnimal() {
-		System.out.println("\n\n|-| ATUALIZACAO DE ANIMAIS |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| ATUALIZACAO DE ANIMAIS |-|" + Colors.RESET);
 		Animal objAnimal = new Animal();
-		objAnimal.setId(Console.readInt("Informe o ID do animal que deseja atualizar: "));
+		objAnimal.setId(Console
+				.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe o ID do animal que deseja atualizar: " + Colors.RESET));
 		objAnimal = AnimalPersistencia.procurarPorId(objAnimal);
 		if (objAnimal != null) {
 			objAnimal.setNome(Console.readString("Informe o nome atualizado do animal: "));
@@ -152,27 +161,28 @@ public class AppAnimal {
 				if (objCliente != null) {
 					objAnimal.setTutor(objCliente);
 					AnimalPersistencia.atualizar(objAnimal);
-					System.out.println("Animal atualizado com sucesso.");
+					System.out.println(Colors.GREEN_BOLD_BRIGHT + "Animal atualizado com sucesso." + Colors.RESET);
 				} else {
-					System.out.println("\nID do tutor nao encontado.");
+					System.out.println(Colors.RED_BRIGHT + "\nID do tutor nao encontado." + Colors.RESET);
 				}
 
 			} else {
 				AnimalPersistencia.atualizar(objAnimal);
-				System.out.println("Animal atualizado com sucesso.");
+				System.out.println(Colors.GREEN_BOLD_BRIGHT + "Animal atualizado com sucesso." + Colors.RESET);
 			}
 		} else {
-			System.out.println("Animal não encontrado.");
+			System.out.println(Colors.RED_BRIGHT + "Animal não encontrado." + Colors.RESET);
 		}
 	}
 
 	private static void deletarAnimal() {
-		System.out.println("\n\n|-| DELECAO DE CLIENTES |-|");
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| DELECAO DE CLIENTES |-|" + Colors.RESET);
 		Animal objAnimal = new Animal();
-		objAnimal.setId(Console.readInt("Informe ID do animal a ser deletado: "));
+		objAnimal.setId(
+				Console.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe ID do animal a ser deletado: " + Colors.RESET));
 		objAnimal = AnimalPersistencia.procurarPorId(objAnimal);
 		if (objAnimal != null) {
-			System.out.println("Animal encontrado:");
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Animal encontrado:" + Colors.RESET);
 			System.out.println("    ID tutor: " + objAnimal.getTutor().getId());
 			System.out.println("    Nome do tutor: " + objAnimal.getTutor().getNome());
 			System.out.println("	ID animal: " + objAnimal.getId());
@@ -185,15 +195,16 @@ public class AppAnimal {
 			String resposta = Console.readString("Deseja deletar esse animal? S/N: ");
 			if (resposta.equals("S")) {
 				if (AnimalPersistencia.deletar(objAnimal) == true) {
-					System.out.println("\nAnimal deletado.");
+					System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nAnimal deletado." + Colors.RESET);
 				} else {
-					System.out.println("\nA delecao nao pode ser realizada no momento...");
+					System.out.println(
+							Colors.RED_BRIGHT + "\nA delecao nao pode ser realizada no momento..." + Colors.RESET);
 				}
 			} else {
-				System.out.println("\nOperacao cancelada.");
+				System.out.println(Colors.RED_BRIGHT + "\nOperacao cancelada." + Colors.RESET);
 			}
 		} else {
-			System.out.println("\nAnimal não encontrado.");
+			System.out.println(Colors.RED_BRIGHT + "\nAnimal não encontrado." + Colors.RESET);
 		}
 
 	}

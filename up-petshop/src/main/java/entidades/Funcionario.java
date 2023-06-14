@@ -1,12 +1,17 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Funcionario implements Serializable {
@@ -21,12 +26,13 @@ public class Funcionario implements Serializable {
 	private String cpf;
 	private double salario;
 	private double comissao;
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private List<Servico> servicos = new ArrayList<Servico>();
 
 	public Funcionario() {
 	}
 
 	public Funcionario(int id, String nome, String cpf, double salario, double comissao) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -74,8 +80,12 @@ public class Funcionario implements Serializable {
 		this.comissao = comissao;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setAnimais(Servico objServico) {
+		this.servicos.add(objServico);
 	}
 
 }
