@@ -91,7 +91,7 @@ public class AppCliente {
 				System.out.println("------------------");
 			}
 		} else {
-			System.out.println(Colors.RED_BRIGHT + "\nCliente(s) nao encontrados!" + Colors.RESET);
+			System.out.println(Colors.RED_BRIGHT + "\nCliente(s) não encontrado(s)!" + Colors.RESET);
 		}
 
 	}

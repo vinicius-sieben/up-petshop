@@ -1,6 +1,9 @@
 package front;
 
+import java.util.List;
+
 import entidades.Servico;
+import persistencia.ServicosPersistencia;
 
 public class AppServico {
 	public AppServico() {
@@ -27,7 +30,7 @@ public class AppServico {
 				cadastrarServico();
 				break;
 			case 2:
-				// listarServicos();
+				listarServicos();
 				break;
 			case 3:
 				// consultarServico();
@@ -47,6 +50,24 @@ public class AppServico {
 	private static void cadastrarServico() {
 		System.out.println(Colors.GREEN_BACKGROUND + "\n\nCADASTRO DE SERVICO" + Colors.RESET);
 		Servico objServico = new Servico();
+	}
+
+	private static void listarServicos() {
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| LISTAGEM DE SERVICOS |-|" + Colors.RESET);
+		Servico objServico = new Servico();
+		objServico.setDescricao(Console.readString(
+				Colors.YELLOW_BOLD_BRIGHT + "Informe uma parte do serviço que deseja listar: " + Colors.RESET));
+		List<Servico> servicos = ServicosPersistencia.getServicos(objServico);
+		if (!servicos.isEmpty()) {
+			for(Servico x : servicos) {
+				System.out.println("	ID: " + x.getId());
+				System.out.println("	Descrição: " + x.getDescricao());
+				System.out.println("	Valor: " + x.getValor());
+				System.out.println("------------------");
+			}
+		} else {
+			System.out.println(Colors.RED_BRIGHT + "\nServico(s) não encontrado(s)!" + Colors.RESET);
+		}
 	}
 
 }
