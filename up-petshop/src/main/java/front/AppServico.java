@@ -2,7 +2,10 @@ package front;
 
 import java.util.List;
 
+import entidades.Funcionario;
 import entidades.Servico;
+import negocio.Negocio;
+import persistencia.FuncionarioPersistencia;
 import persistencia.ServicosPersistencia;
 
 public class AppServico {
@@ -50,6 +53,24 @@ public class AppServico {
 	private static void cadastrarServico() {
 		System.out.println(Colors.GREEN_BACKGROUND + "\n\nCADASTRO DE SERVICO" + Colors.RESET);
 		Servico objServico = new Servico();
+		Funcionario objFuncionario = new Funcionario();
+		objFuncionario.setCpf(Console.readString("\nInforme o CPF do funcionario: "));
+		if (Negocio.validarCPF(objFuncionario.getCpf()) == true) {
+			if (FuncionarioPersistencia.procurarPorCPF(objFuncionario) != null) {
+				objServico.setDescricao(Console.readString("Informe a descrição do servico: "));
+				objServico.setValor(Console.readDouble("Informe o valor do servico: "));
+				if (ServicosPersistencia.incluir(objServico) == true) {
+					System.out.println("\nServico cadastrado! ");
+				} else {
+					System.out.println(Colors.RED_BRIGHT + "\nA atualização não pode ser realizada no momento..." + Colors.RESET);
+				}
+
+			} else {
+				System.out.println(Colors.RED_BRIGHT + "\nServico já cadastrado." + Colors.RESET);
+			}
+		} else {
+			System.out.println(Colors.RED_BRIGHT + "\nCPF inválido!" + Colors.RESET);
+		}
 	}
 
 	private static void listarServicos() {
@@ -59,7 +80,7 @@ public class AppServico {
 				Colors.YELLOW_BOLD_BRIGHT + "Informe uma parte do serviço que deseja listar: " + Colors.RESET));
 		List<Servico> servicos = ServicosPersistencia.getServicos(objServico);
 		if (!servicos.isEmpty()) {
-			for(Servico x : servicos) {
+			for (Servico x : servicos) {
 				System.out.println("	ID: " + x.getId());
 				System.out.println("	Descrição: " + x.getDescricao());
 				System.out.println("	Valor: " + x.getValor());

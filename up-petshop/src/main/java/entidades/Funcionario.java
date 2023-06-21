@@ -1,17 +1,11 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Funcionario implements Serializable {
@@ -26,8 +20,8 @@ public class Funcionario implements Serializable {
 	private String cpf;
 	private double salario;
 	private double comissao;
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private List<Servico> servicos = new ArrayList<Servico>();
+	// @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	// private List<Servico> servicos = new ArrayList<Servico>();
 
 	public Funcionario() {
 	}
@@ -80,6 +74,7 @@ public class Funcionario implements Serializable {
 		this.comissao = comissao;
 	}
 
+	/*
 	public List<Servico> getServicos() {
 		return servicos;
 	}
@@ -87,5 +82,5 @@ public class Funcionario implements Serializable {
 	public void setAnimais(Servico objServico) {
 		this.servicos.add(objServico);
 	}
-
+	*/
 }
