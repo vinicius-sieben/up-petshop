@@ -36,13 +36,13 @@ public class AppServico {
 				listarServicos();
 				break;
 			case 3:
-				// consultarServico();
+				consultarServicos();
 				break;
 			case 4:
-				// atualizarServico();
+				atualizarServico();
 				break;
 			case 5:
-				// deletarServico();
+				deletarServicos();
 				break;
 			}
 
@@ -62,7 +62,8 @@ public class AppServico {
 				if (ServicosPersistencia.incluir(objServico) == true) {
 					System.out.println("\nServico cadastrado! ");
 				} else {
-					System.out.println(Colors.RED_BRIGHT + "\nA atualização não pode ser realizada no momento..." + Colors.RESET);
+					System.out.println(
+							Colors.RED_BRIGHT + "\nA atualização não pode ser realizada no momento..." + Colors.RESET);
 				}
 
 			} else {
@@ -89,6 +90,66 @@ public class AppServico {
 		} else {
 			System.out.println(Colors.RED_BRIGHT + "\nServico(s) não encontrado(s)!" + Colors.RESET);
 		}
+	}
+
+	private static void consultarServicos() {
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| CONSULTA DE SERVICOS |-|" + Colors.RESET);
+		Servico objServico = new Servico();
+		objServico.setId(Console
+				.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe o ID do servico que deseja buscar: " + Colors.RESET));
+		objServico = ServicosPersistencia.procurarPorId(objServico);
+		if (objServico != null) {
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Servico encontrado:" + Colors.RESET);
+			System.out.println("    Descricao do servico: " + objServico.getDescricao());
+			System.out.println("    Valor do servico : " + objServico.getValor());
+			System.out.println("----------------------------------");
+		} else {
+			System.out.println(Colors.RED_BRIGHT + "\nNenhum servico com esse ID registrado." + Colors.RESET);
+		}
+	}
+
+	private static void atualizarServico() {
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| ATUALIZACAO DE SERVICOS |-|" + Colors.RESET);
+		Servico objServico = new Servico();
+		objServico.setId(Console
+				.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe o ID do servico que deseja atualizar: " + Colors.RESET));
+		objServico = ServicosPersistencia.procurarPorId(objServico);
+		if (objServico != null) {
+			objServico.setDescricao(Console.readString("Informe a descrição atualizada do servico: "));
+			objServico.setValor(Console.readDouble("Informe o valor atualizado do servico: "));
+			ServicosPersistencia.atualizar(objServico);
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Servico atualizado com sucesso." + Colors.RESET);
+		} else {
+			System.out.println(Colors.RED_BRIGHT + "Servico não encontrado." + Colors.RESET);
+		}
+	}
+
+	private static void deletarServicos() {
+		System.out.println(Colors.GREEN_BACKGROUND + "\n\n|-| DELECAO DE SERVICOS |-|" + Colors.RESET);
+		Servico objServico = new Servico();
+		objServico.setId(
+				Console.readInt(Colors.WHITE_BOLD_BRIGHT + "Informe ID do servico a ser deletado: " + Colors.RESET));
+		objServico = ServicosPersistencia.procurarPorId(objServico);
+		if (objServico != null) {
+			System.out.println(Colors.GREEN_BOLD_BRIGHT + "Servico encontrado:" + Colors.RESET);
+			System.out.println("    Descricao do servico: " + objServico.getDescricao());
+			System.out.println("    Valor do servico: " + objServico.getValor());
+			System.out.println("----------------------------------");
+			String resposta = Console.readString("Deseja deletar esse Servico? S/N: ");
+			if (resposta.equals("S")) {
+				if (ServicosPersistencia.deletar(objServico) == true) {
+					System.out.println(Colors.GREEN_BOLD_BRIGHT + "\nServico deletado." + Colors.RESET);
+				} else {
+					System.out.println(
+							Colors.RED_BRIGHT + "\nA delecao nao pode ser realizada no momento..." + Colors.RESET);
+				}
+			} else {
+				System.out.println(Colors.RED_BRIGHT + "\nOperacao cancelada." + Colors.RESET);
+			}
+		} else {
+			System.out.println(Colors.RED_BRIGHT + "\nServico não encontrado." + Colors.RESET);
+		}
+
 	}
 
 }
