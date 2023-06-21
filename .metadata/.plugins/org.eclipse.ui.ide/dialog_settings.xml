@@ -20,6 +20,8 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\Vinicius\Desktop\Estudos\Faculdade\up-petshop\up-petshop"/>
+			<item value="C:\Users\Vinicius\Desktop\Estudos\Faculdade\up-petshop"/>
 			<item value="C:\Users\vinicius.sieben\Desktop\Faculdade\up-petshop"/>
 		</list>
 	</section>
