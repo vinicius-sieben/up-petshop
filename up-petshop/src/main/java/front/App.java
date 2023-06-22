@@ -19,7 +19,8 @@ public class App {
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[2] - Menu de funcionários" + Colors.RESET);
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[3] - Menu de animais" + Colors.RESET);
 			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[4] - Menu de serviços" + Colors.RESET);
-			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[5] - Sair" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[5] - Menu de vendas" + Colors.RESET);
+			System.out.println(Colors.WHITE_BOLD_BRIGHT + "[6] - Sair" + Colors.RESET);
 			op = Console.readInt(Colors.WHITE_BOLD_BRIGHT + "\nSelecione uma opção: " + Colors.RESET);
 			switch (op) {
 			case 1:
@@ -34,9 +35,12 @@ public class App {
 			case 4:
 				new AppServico();
 				break;
+			case 5:
+				new AppVenda();
+				break;
 			}
 
-		} while (op != 5);
+		} while (op != 6);
 
 	}
 
