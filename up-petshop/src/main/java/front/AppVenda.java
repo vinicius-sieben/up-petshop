@@ -1,10 +1,16 @@
 package front;
 
-import entidades.Cliente;
+import entidades.Animal;
 import entidades.Funcionario;
+import entidades.Servico;
+import entidades.ServicoVenda;
+import entidades.Venda;
 import negocio.Negocio;
-import persistencia.ClientePersistencia;
+import negocio.ServicoNegocio;
+import persistencia.AnimalPersistencia;
 import persistencia.FuncionarioPersistencia;
+import persistencia.ServicosPersistencia;
+import persistencia.VendaPersistencia;
 
 public class AppVenda {
 	public AppVenda() {
@@ -55,16 +61,41 @@ public class AppVenda {
 		if (Negocio.validarCPF(objFuncionario.getCpf()) == true) {
 			objFuncionario = FuncionarioPersistencia.procurarPorCPF(objFuncionario);
 			if (objFuncionario != null) {
-				Cliente objCliente = new Cliente();
-				objCliente.setCpf(Console.readString("Informe o CPF do cliente: "));
-				if (Negocio.validarCPF(objCliente.getCpf()) == true) {
-					objCliente = ClientePersistencia.procurarPorCPF(objCliente);
-					if (objCliente != null) {
-						// Listar animais do cliente e escolher o animal p associar
+				Animal objAnimal = new Animal();
+				objAnimal.setId(Console.readInt("Informe o ID do animal: "));
+				objAnimal = AnimalPersistencia.procurarPorId(objAnimal);
+				if (objAnimal != null) {
+					Venda objVenda = new Venda();
+					objVenda.setFuncionario(objFuncionario);
+					objVenda.setIdAnimal(objAnimal.getId());
+					objVenda.setData(Console.readString("Informe a data da venda: "));
+					double precoVenda;
+					String resposta = "";
+					do {
+						ServicoVenda objServicoVenda = new ServicoVenda();
+						Servico objServico = new Servico();
+						objServico.setId(Console.readInt("Informe o ID do serviço a ser adicionado: "));
+						objServico = ServicosPersistencia.procurarPorId(objServico);
+						if (objServico != null) {
+							objServicoVenda.setServico(objServico);
+							objServicoVenda.setQuantidade(Console.readInt("Informe a quantidade: "));
+							precoVenda = ServicoNegocio.calcularPrecoVenda(objServico);
+							objServicoVenda.setUnitario(precoVenda);
+							System.out.println("Valor da compra: " + precoVenda);
+							objVenda.getServicos().add(objServicoVenda);
+							resposta = Console.readString("Mais produtos? ");
+						} else {
+							System.out.println("\n\nProduto não encontrado...");
+						}
+					} while (resposta.equals("S"));
+					if (VendaPersistencia.incluir(objVenda) == true) {
+						System.out.println(Colors.GREEN_BRIGHT + "\nVenda cadastrada com sucesso." + Colors.RESET);
+					} else {
+						System.out.println(Colors.RED_BRIGHT + "\nA atualização não pode ser realizada no momento..."
+								+ Colors.RESET);
 					}
-					System.out.println("Cliente não encontrado.");
 				} else {
-					System.out.println("CPF inválido.");
+					System.out.println("animal não encontrado.");
 				}
 			} else {
 				System.out.println("Funcionario não encontrado.");
