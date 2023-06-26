@@ -1,0 +1,46 @@
+				Cliente objCliente = new Cliente();
+				objCliente.setCpf(Console.readString("Informe o CPF do cliente: "));
+				if (Negocio.validarCPF(objCliente.getCpf()) == true) {
+					objCliente = ClientePersistencia.procurarPorCPF(objCliente);
+					if (objCliente != null) {
+						Venda objVenda = new Venda();
+						String resp = Console.readString("Deseja listar os animais do cliente " + objCliente.getNome() + "? S/N: ");
+						if (resp.equals("S")) {
+							List<Animal> animais = objCliente.getAnimais();
+							System.out.println("\nAnimais do cliente: " + objCliente.getNome());
+							for (Animal x : animais) {
+								System.out.println("---------------");
+								System.out.println("ID animal: " + x.getId());
+								System.out.println("Nome animal: " + x.getNome());
+								System.out.println("---------------");
+							}
+							Animal objAnimal = new Animal();
+							objAnimal.setId(Console.readInt("Informe o ID do animal referente à compra: "));
+							objAnimal = AnimalPersistencia.procurarPorId(objAnimal);
+							if (objAnimal != null) {
+								String resposta;
+								do {
+									Servico objServico = new Servico();
+									objServico.setId(Console.readInt("Informe o ID do serviço a ser adicionado: "));
+									objServico = ServicosPersistencia.procurarPorId(objServico);
+									objVenda.getServicos().add(objServico);
+									resposta = Console.readString("Deseja inserir novo serviço? S/N: ");
+								} while (resposta != "N");
+								if (VendaPersistencia.incluir(objVenda) == true) {
+									System.out.println(
+											Colors.GREEN_BRIGHT + "\nVenda cadastrada com sucesso." + Colors.RESET);
+								} else {
+									System.out.println(Colors.RED_BRIGHT
+											+ "\nA atualização não pode ser realizada no momento..." + Colors.RESET);
+								}
+							} else {
+								System.out.println("Animal não encontrado.");
+							}
+						} else {
+							// CASO NÃO LISTAR ANIMAIS
+						}
+					}
+					System.out.println("Cliente não encontrado.");
+				} else {
+					System.out.println("CPF inválido.");
+				}
